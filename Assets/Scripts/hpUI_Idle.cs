@@ -19,7 +19,7 @@ public class hpUI_Idle : MonoBehaviour
     {
         player = FindFirstObjectByType<Player>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        randomInterval = new Vector2(5f, 10f);
+        randomInterval = new Vector2(3f, 6f);
         interval = Random.Range(randomInterval.x, randomInterval.y);       
 
         startPos = transform.position;
