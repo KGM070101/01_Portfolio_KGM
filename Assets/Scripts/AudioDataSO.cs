@@ -3,6 +3,7 @@
 
 
 // 새 코드
+// 집에서 작업함
 public class AudioData : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
