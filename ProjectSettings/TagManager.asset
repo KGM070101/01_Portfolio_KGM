@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Ground
+  - Rain
+  - Item
+  - Shield
+  - ShieldItem
+  - SpeedItem
+  - DoubleScoreItem
+  - SmallItem
+  - LiskItem
+  - SamuraiItem
+  - Rain3
+  - Rain2_Hard
+  - Rain_Hard
+  - Rain3_Hard
+  - RightWall
+  - LeftWall
+  - Ball
+  - Fregnents
+  - Rain4
+  - Rain4_Hard
+  - Player_SecondCollider
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Ground
+  - Rain3
+  - Rain3_Hard
+  - Fregments
+  - Rain4
+  - Rain3_Splitted
+  - Rain4_Hard
+  - Shield
+  - Player_SecondCollider
+  - Rain
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  m_RenderingLayers:
+  - Default
