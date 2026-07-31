@@ -1,6 +1,8 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+
+//현재 쓰지 않음
 public class ButtonShaking : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerClickHandler
 {
     private RectTransform rectTransform;
