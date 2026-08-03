@@ -7,8 +7,11 @@ public class ClassicButtonRect : MonoBehaviour, IPointerEnterHandler, IPointerEx
 {
     [SerializeField] GameObject button;
 
+    private SFX_Manager sfx;
+
     private Sequence swingSequence;
     private Vector2 OriginalScale;
+    
 
     private void Awake()
     {
@@ -17,6 +20,7 @@ public class ClassicButtonRect : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     private void Start()
     {
+        sfx = FindFirstObjectByType<SFX_Manager>();
         OriginalScale = button.transform.localScale;
     }
     public void OnPointerEnter(PointerEventData eventData)
@@ -32,6 +36,7 @@ public class ClassicButtonRect : MonoBehaviour, IPointerEnterHandler, IPointerEx
             .SetLoops(-1)
             .SetUpdate(true);
 
+        sfx.Button_Hover();
         button.transform.localScale = OriginalScale * 1.1f;
 
         //rectTransform.localRotation = Quaternion.Euler(0f, 0f, -15f);
@@ -57,6 +62,7 @@ public class ClassicButtonRect : MonoBehaviour, IPointerEnterHandler, IPointerEx
         swingSequence.Kill();
         button.transform.rotation = Quaternion.identity;
 
+        //sfx.Button_Down();
         button.transform.localScale = OriginalScale;
     }
 }

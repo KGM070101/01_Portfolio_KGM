@@ -229,6 +229,7 @@ public class GameOverStartManager : MonoBehaviour
         ModeSelectMenu.SetActive(false);
         TitleMenu.SetActive(false);
         SFX.Stop_TitleBGM();
+        SFX.Button_Down();
         Time.timeScale = 1.0f;
         Invoke("Classic_Mode", 1.5f);
     }
@@ -240,6 +241,7 @@ public class GameOverStartManager : MonoBehaviour
         ModeSelectMenu.SetActive(false);
         TitleMenu.SetActive(false);
         SFX.Stop_TitleBGM();
+        SFX.Button_Down();
         Time.timeScale = 1.0f;
         Invoke("Hard_Mode", 1.5f);
     }
@@ -257,9 +259,7 @@ public class GameOverStartManager : MonoBehaviour
         //BUH.rectTransform.localScale = BUH.OriginalScale;
 
         SFX.GameBGM();
-        SFX.Stop_TitleBGM();
-        SFX.Button_Down();
-       
+        SFX.Stop_TitleBGM();              
     }
 
     public void Hard_Mode()
@@ -278,9 +278,7 @@ public class GameOverStartManager : MonoBehaviour
         //BUH.rectTransform.localScale = BUH.OriginalScale;
 
         SFX.GameBGM();
-        SFX.Stop_TitleBGM();
-        SFX.Button_Down();
-        
+        SFX.Stop_TitleBGM();                
     }
 
     public void Back()

@@ -80,7 +80,7 @@ public class SFX_Manager : MonoBehaviour
     }
 
     public void Button_Down()
-    {
+    {        
         buttondown.volume = 1;
         buttondown.pitch = 1.5f;
         buttondown.PlayOneShot(ButtonDown);
