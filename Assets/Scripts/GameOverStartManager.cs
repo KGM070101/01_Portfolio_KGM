@@ -32,6 +32,7 @@ public class GameOverStartManager : MonoBehaviour
     public static bool Hard = false;
     public bool hard = false;
     public bool GameStarted = false;
+    public bool IsPausing = false;
 
 
     private Coroutine afterContinueCountRoutine;
@@ -138,8 +139,9 @@ public class GameOverStartManager : MonoBehaviour
             {
                 Invoke("Pause_Game", 0f);
             }            
-        }       
+        }
         //Debug.Log(Hard);
+        Debug.Log(IsPausing);
     }
 
     public void GameOver()
@@ -319,6 +321,7 @@ public class GameOverStartManager : MonoBehaviour
     }
     public void Pause_Game()
     {
+        IsPausing = true;
         PauseScreen.SetActive(true);
         Time.timeScale = 0f;
         //BUH.rectTransform.localScale = BUH.OriginalScale;
@@ -348,6 +351,7 @@ public class GameOverStartManager : MonoBehaviour
 
     public void ContinueGame()
     {
+        IsPausing = false;
         Time.timeScale = 1.0f;
         //BUH.rectTransform.localScale = BUH.OriginalScale;
         SFX.UnPause_GameBGM();              

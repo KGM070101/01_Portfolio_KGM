@@ -29,6 +29,8 @@ public class Rain3 : MonoBehaviour
 
     private SFX_Manager SFX;
 
+    private GameOverStartManager gosm;
+
     private Color HitColor = new Color(0.97f, 0.64f, 0.63f);
 
     public int BounceCount = 0;
@@ -45,6 +47,7 @@ public class Rain3 : MonoBehaviour
         rainManager = FindFirstObjectByType<RainManager>();
         cameraShaking = FindFirstObjectByType<CameraShaking>();
         SFX = FindFirstObjectByType<SFX_Manager>();
+        gosm = FindFirstObjectByType<GameOverStartManager>();
     }
 
     private void Update()
@@ -108,16 +111,22 @@ public class Rain3 : MonoBehaviour
             }
             if(player.isDead==false)
             {
-                cameraShaking.ShakeCamera(0.1f, 0.1f);
-            }
-            
+                if(gosm.IsPausing==false)
+                {
+                    cameraShaking.ShakeCamera(0.1f, 0.1f);
+                    //Debug.Log("카메라 흔들림");
+                }                
+            }            
         }
 
         if (collision.gameObject.CompareTag("Player"))
         {
             if (player.isDead == false)
             {
-                cameraShaking.ShakeCamera(0.1f, 0.1f);
+                if(gosm.IsPausing==false)
+                {
+                    cameraShaking.ShakeCamera(0.1f, 0.1f);
+                }                    
             }
 
             if (player.PlayerHP>2)
@@ -201,7 +210,10 @@ public class Rain3 : MonoBehaviour
         {
             if (player.isDead == false)
             {
-                cameraShaking.ShakeCamera(0.1f, 0.1f);
+                if(gosm.IsPausing==false)
+                {
+                    cameraShaking.ShakeCamera(0.1f, 0.1f);
+                }                
             }
         }
     }

@@ -31,6 +31,8 @@ public class Rain3_Hard : MonoBehaviour
 
     private Rain4_Hard_PlayerDectecterCollider Rain4_PDC;
 
+    private GameOverStartManager gosm;
+
     private Color HitColor = new Color(0.97f, 0.64f, 0.63f);
 
     public int BounceCount = 0;
@@ -48,6 +50,7 @@ public class Rain3_Hard : MonoBehaviour
         cameraShaking = FindFirstObjectByType<CameraShaking>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         Rain4_PDC = FindFirstObjectByType<Rain4_Hard_PlayerDectecterCollider>(FindObjectsInactive.Include);
+        gosm = FindFirstObjectByType<GameOverStartManager>();
     }
 
     private void Update()
@@ -113,7 +116,10 @@ public class Rain3_Hard : MonoBehaviour
 
             if (player.isDead == false)
             {
-                cameraShaking.ShakeCamera(0.1f, 0.2f);
+                if(gosm.IsPausing==false)
+                {
+                    cameraShaking.ShakeCamera(0.1f, 0.2f);
+                }                
             }
 
         }
@@ -126,7 +132,10 @@ public class Rain3_Hard : MonoBehaviour
                 {
                     if (player.isDead == false)
                     {
-                        cameraShaking.ShakeCamera(0.1f, 0.2f);
+                        if(gosm.IsPausing==false)
+                        {
+                            cameraShaking.ShakeCamera(0.1f, 0.2f);
+                        }                        
                     }
 
                     if (player.PlayerHP > 2)
@@ -213,7 +222,10 @@ public class Rain3_Hard : MonoBehaviour
 
                 if (player.isDead == false)
                 {
-                    cameraShaking.ShakeCamera(0.1f, 0.2f);
+                    if(gosm.IsPausing==false)
+                    {
+                        cameraShaking.ShakeCamera(0.1f, 0.2f);
+                    }                    
                 }
 
                 if (player.PlayerHP > 2)
@@ -290,7 +302,10 @@ public class Rain3_Hard : MonoBehaviour
         {
             if (player.isDead == false)
             {
-                cameraShaking.ShakeCamera(0.1f, 0.2f);
+                if(gosm.IsPausing==false)
+                {
+                    cameraShaking.ShakeCamera(0.1f, 0.2f);
+                }                
             }
         }
 
