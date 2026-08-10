@@ -3,19 +3,35 @@ using UnityEngine;
 
 public class CameraShaking : MonoBehaviour
 {
-    private Vector3 OriginalPos;
+    private GameOverStartManager gosm;
+    private Coroutine shakingCoroutine;
+    public Vector3 OriginalPos;
 
     private void Awake()
     {
+        gosm = FindFirstObjectByType<GameOverStartManager>();
         OriginalPos = transform.position;
+    }
+
+    private void Update()
+    {
+        if(gosm.IsPausing==true)
+        {
+            if(shakingCoroutine!=null)
+            {
+                StopCoroutine(shakingCoroutine);
+            }            
+            transform.position = OriginalPos;
+            Debug.Log("isStoping");
+        }
     }
 
     public void ShakeCamera(float duration, float movementValue)
     {
-        StartCoroutine(shakingCamera(duration, movementValue));
+        shakingCoroutine = StartCoroutine(shakingCamera(duration, movementValue));
     }
 
-    private IEnumerator shakingCamera(float duration, float movementValue)
+    public IEnumerator shakingCamera(float duration, float movementValue)
     {
         float endTime = 0f;
 
