@@ -4295,6 +4295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52de7410de87d0b43a4b4690f41acc99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OriginalPos: {x: 0, y: 0, z: 0}
 --- !u!1 &541283681
 GameObject:
   m_ObjectHideFlags: 0
@@ -7178,7 +7179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInDoubleScoreState: 0
-  ScoreCount: 380
+  ScoreCount: 0
 --- !u!212 &1257756301
 SpriteRenderer:
   m_ObjectHideFlags: 0
