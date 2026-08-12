@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     private Shield shield;
     private Shield_Animation Shield_animation;
     private hpUI_IndexManager HP_Index;
+    private DOTween doTween;
+    private Sequence seq;
    
     public int PlayerHP = 5;
     public float movespeed;   
@@ -691,6 +693,8 @@ public class Player : MonoBehaviour
                     {
                         Invoke("ShortShieldActivate", 0.1f);
                         Invoke("End_ShortShield", shortshieldRange);
+
+                        PlayerCollapse();
                     }
                 }
                 
@@ -939,7 +943,7 @@ public class Player : MonoBehaviour
             SFX.Item_Get();
             collision.gameObject.SetActive(false);
         }
-
+        
         if(isInSamuraiState==true)
         {
             if(collision.gameObject.CompareTag("Rain")||
@@ -1045,6 +1049,17 @@ public class Player : MonoBehaviour
     private void Hit()
     {
         spriteRenderer.color = Color.white;
+    }
+
+    private void PlayerCollapse()
+    {
+        seq = DOTween.Sequence().
+            Append(transform.DOScaleY(1.0f, 0.15f).SetEase(Ease.OutCubic)).
+            Append(transform.DOScaleY(1.5f, 0.15f).SetEase(Ease.InCubic));
+
+        seq = DOTween.Sequence().
+            Append(transform.DOScaleX(1.7f, 0.15f).SetEase(Ease.OutCubic)).
+            Append(transform.DOScaleX(1.5f, 0.15f).SetEase(Ease.InCubic));        
     }
 
     //private void End_Red()
