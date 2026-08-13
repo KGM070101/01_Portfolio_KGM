@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     private hpUI_IndexManager HP_Index;
     private DOTween doTween;
     private Sequence seq;
+    
    
     public int PlayerHP = 5;
     public float movespeed;   
@@ -89,6 +90,7 @@ public class Player : MonoBehaviour
         shield = FindFirstObjectByType<Shield>(FindObjectsInactive.Include);
         Shield_animation = FindFirstObjectByType<Shield_Animation>();
         HP_Index = FindFirstObjectByType<hpUI_IndexManager>();
+       
 
         Shield_animation.spriteRenderer.color = ShieldInvisible;
         //StartPosition = rigidbody.position; //(Ground)¶¥¿¡ ´êÀ¸¸é ¿ø À§Ä¡
@@ -704,6 +706,8 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             bLanded = true;
+
+            //seq=DOTween.Sequence()
             //Debug.Log("Enter");
         }   
 
@@ -845,6 +849,7 @@ public class Player : MonoBehaviour
             itemdurationbar.StartDurationBar(8.0f);
             Shield.SetActive(true);
             SFX.Item_Get();
+            Invoke("Blink_Shield", 6.5f);
             Invoke("End_Shield", 8.0f);
         }
 
@@ -993,6 +998,11 @@ public class Player : MonoBehaviour
     {
         Shield.SetActive(false);
         Shield_animation.spriteRenderer.color = ShieldInvisible;
+    }
+
+    private void Blink_Shield()
+    {
+        Shield_animation.Blink();
     }
 
     private void ShortShieldActivate()
