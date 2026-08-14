@@ -1,7 +1,28 @@
 using UnityEngine;
 
+/// <summary>
+/// 효과음 종류
+/// </summary>
+public enum SfxType
+{
+    Dash,
+    Jump,
+    ButtonDown,
+    Rain3Landing,
+    Slash,
+    ButtonHover,
+    PlayerHit,
+    Rain2Faling,
+    Dead,
+    ItemGet,
+    Heal
+}
+
 public class SFX_Manager : MonoBehaviour
 {
+    [SerializeField] private AudioSource[] _sfxSources;
+    [SerializeField] private AudioClip[] _sfxClips;
+
     [SerializeField] private AudioSource title_bgm;
     [SerializeField] private AudioSource playerdash;
     [SerializeField] private AudioSource playerjump;
@@ -30,6 +51,12 @@ public class SFX_Manager : MonoBehaviour
     public AudioClip ItemGet;
     public AudioClip PlayerHeal;
 
+    float bgmVolume;
+    float sfxVolume;
+
+    bool bgmOn = true;      // BGM 온오프 여부
+    bool sfxOn = true;      // SFX 온오프 여부
+
     private void Start()
     {
         //playerdash = GetComponent<AudioSource>();
@@ -42,6 +69,13 @@ public class SFX_Manager : MonoBehaviour
         title_bgm.pitch = 1.0f;
         title_bgm.Play();
         title_bgm.loop = true;
+    }
+
+    public void SetSfxOn(bool isOn)
+    {
+        sfxOn = isOn;
+        playerdash.mute = !sfxOn;
+        // ....
     }
     
     public void Player_Dash()

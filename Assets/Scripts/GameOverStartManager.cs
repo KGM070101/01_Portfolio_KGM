@@ -23,6 +23,9 @@ public class GameOverStartManager : MonoBehaviour
     private ScoreBoardCanvas scoreBoard;// camelCase
     private ModeSelectScreenSlide msScreen_Slide;
     private TitleScreenSlide titleScreen_Slide;
+    private BestScoreIndicator bestScoreIndicator;
+    private RainDestroyer rainDestroyer;
+    private ScoreIndicator scoreIndicator;
     
     //private ButtonUIHover BUH;
 
@@ -37,11 +40,7 @@ public class GameOverStartManager : MonoBehaviour
 
     private Coroutine afterContinueCountRoutine;
     private void TIMESCALE()
-    {
-
-        BestScoreIndicator BSI = FindFirstObjectByType<BestScoreIndicator>();
-        RainDestroyer BSC = FindFirstObjectByType<RainDestroyer>();
-
+    {        
         GameOverPanel.SetActive(true);
         GameOverText.SetActive(true);
         ReplayButton.SetActive(true);
@@ -51,21 +50,24 @@ public class GameOverStartManager : MonoBehaviour
         scoreBoard.DropPanel();
         Time.timeScale = 0.0f;
 
-        if (BSC.ScoreCount > BSI.BestScore)
-        {
-            //Debug.Log("NBT Activated");
-            NewBestText.SetActive(true);
-            BSI.IndicateNewBestScoreGUI();
-        }
+        //if (BSC.ScoreCount > BSI.BestScore)
+        //{
+        //    //Debug.Log("NBT Activated");
+        //    NewBestText.SetActive(true);
+        //    BSI.IndicateNewBestScoreGUI();
+        //}
     }
     private void Start()
     {
         rainManager = FindFirstObjectByType<RainManager>();
+        rainDestroyer = FindFirstObjectByType<RainDestroyer>();
+        scoreIndicator = FindFirstObjectByType<ScoreIndicator>();
         SFX = FindFirstObjectByType<SFX_Manager>();
         countDown = FindFirstObjectByType<CountDown>(FindObjectsInactive.Include);
         scoreBoard = FindFirstObjectByType<ScoreBoardCanvas>(FindObjectsInactive.Include);
         titleScreen_Slide = FindFirstObjectByType<TitleScreenSlide>(FindObjectsInactive.Include);
         msScreen_Slide = FindFirstObjectByType<ModeSelectScreenSlide>(FindObjectsInactive.Include);
+        bestScoreIndicator = FindFirstObjectByType<BestScoreIndicator>();
         //BUH = FindFirstObjectByType<ButtonUIHover>(FindObjectsInactive.Include);
         
         GameOverPanel.SetActive(false);
@@ -148,24 +150,29 @@ public class GameOverStartManager : MonoBehaviour
     {
         //SFX.Player_Dead();
         //SFX.Stop_GameBGM();
-        Invoke("TIMESCALE", 2.0f);
-        BestScoreIndicator BSI = FindFirstObjectByType<BestScoreIndicator>();
-        RainDestroyer BSC = FindFirstObjectByType<RainDestroyer>();
-
+        Invoke("TIMESCALE", 2.0f);       
         //Debug.Log("BSC: " + BSC);
         //Debug.Log("BSI: " + BSI);
         //Debug.Log("ScoreCount: " + BSC.ScoreCount);
         //Debug.Log("BestScore: " + BSI.BestScore);
+        if(classic==true&&hard==false)
+        {
+            bestScoreIndicator.SaveBestScore();
+            bestScoreIndicator.UpdateBestScoreGUI();
+        }
+        if(classic==false&&hard==true)
+        {
+            bestScoreIndicator.SaveBestScore_Hard();
+            bestScoreIndicator.UpdateBestScoreGUI_Hard();
+        }
         
-        BSI.SaveBestSocre();
-        BSI.UpdateBestScoreGUI();
     }
 
     public void ReplayGame()
     {        
         if (classic==true)
         {
-            Debug.Log("Restart");
+            //Debug.Log("Restart");
             Time.timeScale = 1.0f;
             isReplay = true;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -233,6 +240,8 @@ public class GameOverStartManager : MonoBehaviour
         SFX.Stop_TitleBGM();
         SFX.Button_Down();
         Time.timeScale = 1.0f;
+        bestScoreIndicator.IndicateBestScoreGUI();
+        scoreIndicator.UpdateCountGUI();
         Invoke("Classic_Mode", 1.5f);
     }
 
@@ -245,6 +254,8 @@ public class GameOverStartManager : MonoBehaviour
         SFX.Stop_TitleBGM();
         SFX.Button_Down();
         Time.timeScale = 1.0f;
+        bestScoreIndicator.IndicateBestScoreGUI_Hard();
+        scoreIndicator.UpdateCountGUI_Hard();
         Invoke("Hard_Mode", 1.5f);
     }
     public void Classic_Mode()
@@ -355,7 +366,5 @@ public class GameOverStartManager : MonoBehaviour
         Time.timeScale = 1.0f;
         //BUH.rectTransform.localScale = BUH.OriginalScale;
         SFX.UnPause_GameBGM();              
-    }
-
-    
+    }   
 } 

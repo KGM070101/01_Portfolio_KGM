@@ -161,7 +161,7 @@ public class RainManager : MonoBehaviour
 
         if(GOSM.hard==true)
         {
-            if (rainDestroyer.ScoreCount >= 100)  //점수구간
+            if (rainDestroyer.ScoreCount_Hard >= 100)  //점수구간
             {
                 Trigger1++;
                 spawnInterval_Hard = 0.28f;
@@ -176,7 +176,7 @@ public class RainManager : MonoBehaviour
                     InvokeRepeating("SpawnRain2_Hard", 0f, spawnInterval2_Hard);
                 }
             }
-            if (rainDestroyer.ScoreCount >= 250)  //점수구간
+            if (rainDestroyer.ScoreCount_Hard >= 250)  //점수구간
             {
                 Trigger2++;
                 spawnInterval_Hard = 0.24f;
@@ -193,7 +193,7 @@ public class RainManager : MonoBehaviour
                     InvokeRepeating("SpawnRain2_Hard", 0f, spawnInterval2_Hard);
                 }
             }
-            if (rainDestroyer.ScoreCount >= 400)  //점수구간
+            if (rainDestroyer.ScoreCount_Hard >= 400)  //점수구간
             {
                 Trigger3++;
                 spawnInterval3_Hard = 10.0f;
@@ -205,7 +205,7 @@ public class RainManager : MonoBehaviour
                     InvokeRepeating("SpawnRain3_Hard", 0f, spawnInterval3_Hard);
                 }
             }
-            if (rainDestroyer.ScoreCount >= 700)  //점수구간
+            if (rainDestroyer.ScoreCount_Hard >= 700)  //점수구간
             {
                 Trigger4++;
                 rain3_Hard.randomXForce = 15.0f;
@@ -217,7 +217,7 @@ public class RainManager : MonoBehaviour
                     InvokeRepeating("SpawnRain4_Hard", 0f, spawnInterval4_Hard);
                 }
             }
-            if (rainDestroyer.ScoreCount >= 1000)  //점수구간
+            if (rainDestroyer.ScoreCount_Hard >= 1000)  //점수구간
             {
                 Trigger5++;
                 rain.randomXForce = 3.0f;

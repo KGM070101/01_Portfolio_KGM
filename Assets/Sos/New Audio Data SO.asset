@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0e76a886ca5884f8452041b00ad0eb, type: 3}
   m_Name: New Audio Data SO
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 0}
-  AudioGroup: 0
+  AudioClip: []
+  AudioGroup: 1

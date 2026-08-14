@@ -11,6 +11,6 @@ public enum AudioGroup
 [CreateAssetMenu(menuName ="AudioData")]
 public class AudioDataSO : ScriptableObject
 {
-    public AudioClip AudioClip;
+    public AudioClip[] AudioClip;
     public AudioGroup AudioGroup;
 }

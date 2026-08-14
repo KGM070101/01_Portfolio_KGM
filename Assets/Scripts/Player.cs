@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     private hpUI_IndexManager HP_Index;
     private DOTween doTween;
     private Sequence seq;
+    private DashCoolDownBar dashCoolDownBar;
     
    
     public int PlayerHP = 5;
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
     private int AfterDeathCount = 0;
     private int AfterDeathCount2 = 0;
     private int JumpCount=0;
-    private int maxHp = 5;
+    private int maxHp = 5;   
     
     private Vector2 originalScale;
     private Vector3 PlayerScale;
@@ -92,6 +93,7 @@ public class Player : MonoBehaviour
         shield = FindFirstObjectByType<Shield>(FindObjectsInactive.Include);
         Shield_animation = FindFirstObjectByType<Shield_Animation>();
         HP_Index = FindFirstObjectByType<hpUI_IndexManager>();
+        dashCoolDownBar = FindFirstObjectByType<DashCoolDownBar>();
        
 
         Shield_animation.spriteRenderer.color = ShieldInvisible;
@@ -111,8 +113,8 @@ public class Player : MonoBehaviour
     private bool isDashing = false;
     private float dashVelocity = 0;
     private float dashTimer = 0;
-    private float dashDuration = 0.1f;
-    private float dashCoolDown = 0.5f;
+    private float dashDuration;
+    private float dashCoolDown;
     private float dashFinished = 0;   
     private void Update()
     {
@@ -162,6 +164,7 @@ public class Player : MonoBehaviour
                         {
                             rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, 12.0f);
                             SFX.Player_Jump();
+                            PlayerJumpAnimation();
                         }
                     }
                     else if(inWasabi==true)
@@ -212,37 +215,46 @@ public class Player : MonoBehaviour
                     {
                         if (Input.GetKeyDown(KeyCode.C) && Input.GetKey(KeyCode.A))
                         {
+                            dashCoolDown = 1.5f;
+                            dashDuration = 0.1f;
                             dashTimer = dashDuration;
                             isDashing = true;
                             dashVelocity = -25.0f;
                             dashFinished = Time.time;
                             animator.SetTrigger("Dash");
+                            dashCoolDownBar.StartCoolDownBar(dashCoolDown);
                             RightDash_Effect.SetActive(true);
                             rightDash_Effect.Start_RightDash_Effect();
-                            SFX.Player_Dash();
+                            SFX.Player_Dash();                            
                         }
 
                         if (Input.GetKeyDown(KeyCode.C) && Input.GetKey(KeyCode.D))
                         {
+                            dashCoolDown = 1.5f;
+                            dashDuration = 0.1f;
                             dashTimer = dashDuration;
                             isDashing = true;
                             dashVelocity = 25.0f;
                             dashFinished = Time.time;
                             animator.SetTrigger("Dash");
+                            dashCoolDownBar.StartCoolDownBar(dashCoolDown);
                             LeftDash_Effect.SetActive(true);
                             leftDash_Effect.Start_LeftDash_Effect();
-                            SFX.Player_Dash();
+                            SFX.Player_Dash();                            
                         }
                     }
                     if (isInSpeedState == true)
                     {
                         if (Input.GetKeyDown(KeyCode.C) && Input.GetKey(KeyCode.A))
                         {
+                            dashCoolDown = 0.5f;
+                            dashDuration = 0.1f;
                             dashTimer = dashDuration;
                             isDashing = true;
                             dashVelocity = -25.0f;
                             dashFinished = Time.time;
                             animator.SetTrigger("Speed_Dash");
+                            dashCoolDownBar.StartCoolDownBar(dashCoolDown);
                             RightDash_Effect.SetActive(true);
                             rightDash_Effect.Start_RightDash_Effect();
                             SFX.Player_Dash();
@@ -250,11 +262,14 @@ public class Player : MonoBehaviour
 
                         if (Input.GetKeyDown(KeyCode.C) && Input.GetKey(KeyCode.D))
                         {
+                            dashCoolDown = 0.5f;
+                            dashDuration = 0.1f;
                             dashTimer = dashDuration;
                             isDashing = true;
                             dashVelocity = 25.0f;
                             dashFinished = Time.time;
                             animator.SetTrigger("Speed_Dash");
+                            dashCoolDownBar.StartCoolDownBar(dashCoolDown);
                             LeftDash_Effect.SetActive(true);
                             leftDash_Effect.Start_LeftDash_Effect();
                             SFX.Player_Dash();
@@ -266,11 +281,14 @@ public class Player : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.C) && Input.GetKey(KeyCode.A))
                 {
+                    dashCoolDown = 1.0f;
+                    dashDuration = 0.2f;
                     dashTimer = dashDuration;
                     isDashing = true;
                     dashVelocity = -25.0f;
                     dashFinished = Time.time;
                     animator.SetTrigger("Samurai_Dash");
+                    dashCoolDownBar.StartCoolDownBar(dashCoolDown);
                     RightDash_Effect.SetActive(true);
                     rightDash_Effect.Start_Samurai_RightDash_Effect();
                     SFX.Player_Dash();
@@ -278,11 +296,14 @@ public class Player : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.C) && Input.GetKey(KeyCode.D))
                 {
+                    dashCoolDown = 1.0f;
+                    dashDuration = 0.2f;
                     dashTimer = dashDuration;
                     isDashing = true;
                     dashVelocity = 25.0f;
                     dashFinished = Time.time;
                     animator.SetTrigger("Samurai_Dash");
+                    dashCoolDownBar.StartCoolDownBar(dashCoolDown);
                     LeftDash_Effect.SetActive(true);
                     leftDash_Effect.Start_Samurai_LeftDash_Effect();
                     SFX.Player_Dash();
@@ -695,8 +716,7 @@ public class Player : MonoBehaviour
             {
                 if(shortShield.isInInvincible==false)
                 {
-                    if (collision.gameObject.CompareTag("Rain3") ||
-                    collision.gameObject.CompareTag("Rain3_Hard"))
+                    if (collision.gameObject.CompareTag("Rain3"))                    
                     {
                         Invoke("ShortShieldActivate", 0.1f);
                         Invoke("End_ShortShield", shortshieldRange);
@@ -707,7 +727,18 @@ public class Player : MonoBehaviour
                         }
                         else if (isInSmallState == false)
                         {
-                            PlayerCollapse();
+                            PlayerCollapse(0.15f);
+                        }
+                    }
+                    if(collision.gameObject.CompareTag("Rain3_Hard"))
+                    {
+                        if (isInSmallState == true)
+                        {
+                            PlayerCollapse_InSmallState();
+                        }
+                        else if (isInSmallState == false)
+                        {
+                            PlayerCollapse(0.15f);
                         }
                     }
                 }
@@ -718,6 +749,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             bLanded = true;
+            
             //seq=DOTween.Sequence()
             //Debug.Log("Enter");
         }   
@@ -832,8 +864,7 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ground"))
         {
-            bLanded = false;
-
+            bLanded = false;          
             if (isInSamuraiState==false)
             {
                 animator.SetBool("bLanded",false);                
@@ -931,7 +962,7 @@ public class Player : MonoBehaviour
             if (isInSmallState==true)
             {
                 col.size=originalScale * 0.5f;
-                col.offset = new Vector2(0, 0.25f);
+                col.offset = new Vector2(0, 0.3f);
                 //transform.localScale=PlayerScale * 0.5f;
 
                 transform.DOScale(PlayerScale * 0.5f, 0.1f).SetEase(Ease.OutCubic);
@@ -1073,15 +1104,15 @@ public class Player : MonoBehaviour
         spriteRenderer.color = Color.white;
     }
 
-    private void PlayerCollapse()
+    private void PlayerCollapse(float duration)
     {
         seq = DOTween.Sequence().
-            Append(transform.DOScaleY(1.0f, 0.15f).SetEase(Ease.OutCubic)).
-            Append(transform.DOScaleY(1.5f, 0.15f).SetEase(Ease.InCubic));
+            Append(transform.DOScaleY(1.0f, duration).SetEase(Ease.OutCubic)).
+            Append(transform.DOScaleY(1.5f, duration).SetEase(Ease.InCubic));
 
         seq = DOTween.Sequence().
-            Append(transform.DOScaleX(1.7f, 0.15f).SetEase(Ease.OutCubic)).
-            Append(transform.DOScaleX(1.5f, 0.15f).SetEase(Ease.InCubic));        
+            Append(transform.DOScaleX(1.7f, duration).SetEase(Ease.OutCubic)).
+            Append(transform.DOScaleX(1.5f, duration).SetEase(Ease.InCubic));        
     }
 
     private void PlayerCollapse_InSmallState()
@@ -1094,6 +1125,32 @@ public class Player : MonoBehaviour
             Append(transform.DOScaleX(0.9f, 0.15f).SetEase(Ease.OutCubic)).
             Append(transform.DOScaleX(0.75f, 0.15f).SetEase(Ease.InCubic));
     }
+
+    private void PlayerJumpAnimation()
+    {
+        seq = DOTween.Sequence().
+            Append(transform.DOScaleY(0.8f, 0.2f).SetEase(Ease.InExpo)).
+            Append(transform.DOScaleY(1.7f, 0.1f).SetEase(Ease.OutCubic)).
+            Append(transform.DOScaleY(1.5f,0.1f).SetEase(Ease.OutCubic));
+
+        seq = DOTween.Sequence().
+            Append(transform.DOScaleX(2.0f, 0.2f).SetEase(Ease.InExpo)).
+            Append(transform.DOScaleX(1.0f, 0.1f).SetEase(Ease.OutCubic)).
+            Append(transform.DOScaleX(1.5f, 0.1f).SetEase(Ease.OutCubic));
+
+        
+    }
+
+    //private void PlayerLandAnimation()
+    //{
+    //    seq = DOTween.Sequence().
+    //        Append(transform.DOScaleY(0.8f, 0.3f).SetEase(Ease.InExpo)).            
+    //        Append(transform.DOScaleY(1.5f, 0.2f).SetEase(Ease.OutCubic));
+
+    //    seq = DOTween.Sequence().
+    //        Append(transform.DOScaleX(2.0f, 0.3f).SetEase(Ease.InExpo)).            
+    //        Append(transform.DOScaleX(1.5f, 0.2f).SetEase(Ease.OutCubic));
+    //}
 
     //private void End_Red()
     //{
