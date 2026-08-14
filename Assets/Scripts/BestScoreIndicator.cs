@@ -32,14 +32,14 @@ public class BestScoreIndicator : MonoBehaviour
 
     public void IndicateBestScoreGUI()
     {
-        RainDestroyer BSC = FindFirstObjectByType<RainDestroyer>();
+        //RainDestroyer BSC = FindFirstObjectByType<RainDestroyer>();
         BestScore = PlayerPrefs.GetInt("BestScore", 0);
         BestScoreUI.text = "Best Score:" + BestScore;
         BestScoreUI.color = Color.black;
     }
     public void UpdateBestScoreGUI()
     {
-        RainDestroyer BSC = FindFirstObjectByType<RainDestroyer>();
+       //RainDestroyer BSC = FindFirstObjectByType<RainDestroyer>();
         BestScore = PlayerPrefs.GetInt("BestScore", 0);
         BestScoreText.text = "Best Score:" + BestScore;
     }

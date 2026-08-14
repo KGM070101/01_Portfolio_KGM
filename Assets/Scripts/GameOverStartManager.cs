@@ -141,7 +141,7 @@ public class GameOverStartManager : MonoBehaviour
             }            
         }
         //Debug.Log(Hard);
-        Debug.Log(IsPausing);
+        //Debug.Log(IsPausing);
     }
 
     public void GameOver()

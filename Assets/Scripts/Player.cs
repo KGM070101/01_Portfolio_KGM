@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     private Vector3 PlayerScale;
     public Vector2 position;
     private Vector2 OriginalOffset;
+    
 
     private bool isInSmallState = false;
     public bool isInSpeedState = false;
@@ -60,6 +61,7 @@ public class Player : MonoBehaviour
     private bool isContactingRightWall = false;
     private bool isContactingLeftWall = false;
     public bool inWasabi = false;
+    
 
     private Color HitColor = new Color(0.97f, 0.64f, 0.63f);
     private Color ShieldInvisible = new Color(0, 0, 0, 0);
@@ -114,6 +116,9 @@ public class Player : MonoBehaviour
     private float dashFinished = 0;   
     private void Update()
     {
+        
+        
+
         if(isContactingLeftWall==true||isContactingRightWall==true)
         {
             rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, -4.0f);
@@ -131,7 +136,7 @@ public class Player : MonoBehaviour
         //Debug.Log("isAlive :"+IA.isAlive);
         //Debug.Log("AfterDeathCount : " + AfterDeathCount);
         //Debug.Log("PlayerHP : "+PlayerHP);
-        //Debug.Log(bLanded);
+        Debug.Log(bLanded);
         position = transform.position;
 
         if(PlayerHP>0)
@@ -695,8 +700,15 @@ public class Player : MonoBehaviour
                     {
                         Invoke("ShortShieldActivate", 0.1f);
                         Invoke("End_ShortShield", shortshieldRange);
-
-                        PlayerCollapse();
+                       
+                        if(isInSmallState==true)
+                        {
+                            PlayerCollapse_InSmallState();
+                        }
+                        else if (isInSmallState == false)
+                        {
+                            PlayerCollapse();
+                        }
                     }
                 }
                 
@@ -706,7 +718,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             bLanded = true;
-
             //seq=DOTween.Sequence()
             //Debug.Log("Enter");
         }   
@@ -822,7 +833,8 @@ public class Player : MonoBehaviour
         if(collision.gameObject.CompareTag("Ground"))
         {
             bLanded = false;
-            if(isInSamuraiState==false)
+
+            if (isInSamuraiState==false)
             {
                 animator.SetBool("bLanded",false);                
             }
@@ -919,7 +931,7 @@ public class Player : MonoBehaviour
             if (isInSmallState==true)
             {
                 col.size=originalScale * 0.5f;
-                col.offset = new Vector2(0, -0.2f);
+                col.offset = new Vector2(0, 0.25f);
                 //transform.localScale=PlayerScale * 0.5f;
 
                 transform.DOScale(PlayerScale * 0.5f, 0.1f).SetEase(Ease.OutCubic);
@@ -1027,10 +1039,10 @@ public class Player : MonoBehaviour
     private void End_SmallItem()
     {
         isInSmallState = false;
-        col.size = originalScale;
+        col.size = originalScale;        
         //transform.localScale = PlayerScale;
-        transform.DOScale(PlayerScale, 0.5f).SetEase(Ease.OutCubic);
         col.offset = OriginalOffset;
+        transform.DOScale(PlayerScale, 0.5f).SetEase(Ease.InCubic);        
     }
     private void End_LiskItem()
     {
@@ -1070,6 +1082,17 @@ public class Player : MonoBehaviour
         seq = DOTween.Sequence().
             Append(transform.DOScaleX(1.7f, 0.15f).SetEase(Ease.OutCubic)).
             Append(transform.DOScaleX(1.5f, 0.15f).SetEase(Ease.InCubic));        
+    }
+
+    private void PlayerCollapse_InSmallState()
+    {
+        seq = DOTween.Sequence().
+            Append(transform.DOScaleY(0.5f, 0.15f).SetEase(Ease.OutCubic)).
+            Append(transform.DOScaleY(0.75f, 0.15f).SetEase(Ease.InCubic));
+
+        seq = DOTween.Sequence().
+            Append(transform.DOScaleX(0.9f, 0.15f).SetEase(Ease.OutCubic)).
+            Append(transform.DOScaleX(0.75f, 0.15f).SetEase(Ease.InCubic));
     }
 
     //private void End_Red()
