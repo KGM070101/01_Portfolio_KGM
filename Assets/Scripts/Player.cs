@@ -164,7 +164,14 @@ public class Player : MonoBehaviour
                         {
                             rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, 12.0f);
                             SFX.Player_Jump();
-                            PlayerJumpAnimation();
+                            if(isInSmallState==false)
+                            {
+                                PlayerJumpAnimation();
+                            }
+                            if(isInSmallState==true)
+                            {
+                                PlayerJumpAnimation_InSmallState();
+                            }                                                            
                         }
                     }
                     else if(inWasabi==true)
@@ -958,6 +965,8 @@ public class Player : MonoBehaviour
             ItemDurationInterface.SetActive(true);
             itemdurationbar.StartDurationBar(8.0f);
             isInSmallState = true;
+            seq.Kill();
+            PlayerJumpAnimation_InSmallState();
             SFX.Item_Get();
             if (isInSmallState==true)
             {
@@ -1136,9 +1145,20 @@ public class Player : MonoBehaviour
         seq = DOTween.Sequence().
             Append(transform.DOScaleX(2.0f, 0.2f).SetEase(Ease.InExpo)).
             Append(transform.DOScaleX(1.0f, 0.1f).SetEase(Ease.OutCubic)).
-            Append(transform.DOScaleX(1.5f, 0.1f).SetEase(Ease.OutCubic));
+            Append(transform.DOScaleX(1.5f, 0.1f).SetEase(Ease.OutCubic));        
+    }
 
-        
+    private void PlayerJumpAnimation_InSmallState()
+    {
+        seq = DOTween.Sequence().
+            Append(transform.DOScaleY(0.4f, 0.2f).SetEase(Ease.InExpo)).
+            Append(transform.DOScaleY(0.9f, 0.1f).SetEase(Ease.OutCubic)).
+            Append(transform.DOScaleY(0.75f, 0.1f).SetEase(Ease.OutCubic));
+
+        seq = DOTween.Sequence().
+            Append(transform.DOScaleX(1.0f, 0.2f).SetEase(Ease.InExpo)).
+            Append(transform.DOScaleX(0.6f, 0.1f).SetEase(Ease.OutCubic)).
+            Append(transform.DOScaleX(0.75f, 0.1f).SetEase(Ease.OutCubic));
     }
 
     //private void PlayerLandAnimation()
