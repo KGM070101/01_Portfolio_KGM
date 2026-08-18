@@ -1113,7 +1113,7 @@ public class Player : MonoBehaviour
         spriteRenderer.color = Color.white;
     }
 
-    private void PlayerCollapse(float duration)
+    private void PlayerCollapse(float duration) //플레이어 찌부
     {
         seq = DOTween.Sequence().
             Append(transform.DOScaleY(1.0f, duration).SetEase(Ease.OutCubic)).
@@ -1124,7 +1124,7 @@ public class Player : MonoBehaviour
             Append(transform.DOScaleX(1.5f, duration).SetEase(Ease.InCubic));        
     }
 
-    private void PlayerCollapse_InSmallState()
+    private void PlayerCollapse_InSmallState() //플레이어 찌부(in small state)
     {
         seq = DOTween.Sequence().
             Append(transform.DOScaleY(0.5f, 0.15f).SetEase(Ease.OutCubic)).
@@ -1135,7 +1135,7 @@ public class Player : MonoBehaviour
             Append(transform.DOScaleX(0.75f, 0.15f).SetEase(Ease.InCubic));
     }
 
-    private void PlayerJumpAnimation()
+    private void PlayerJumpAnimation() //플레이어 점프할 때 스케일 조정
     {
         seq = DOTween.Sequence().
             Append(transform.DOScaleY(0.8f, 0.2f).SetEase(Ease.InExpo)).
@@ -1148,7 +1148,7 @@ public class Player : MonoBehaviour
             Append(transform.DOScaleX(1.5f, 0.1f).SetEase(Ease.OutCubic));        
     }
 
-    private void PlayerJumpAnimation_InSmallState()
+    private void PlayerJumpAnimation_InSmallState() //플레이어 점프할 때 스케일 조정(in small state)
     {
         seq = DOTween.Sequence().
             Append(transform.DOScaleY(0.4f, 0.2f).SetEase(Ease.InExpo)).
