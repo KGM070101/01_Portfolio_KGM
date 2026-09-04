@@ -106,7 +106,7 @@ public class Rain3 : MonoBehaviour
                 LayerMask.NameToLayer("Rain3"),
                 LayerMask.NameToLayer("Ground"),
                 true);
-                    SFX.Rain3_Landing();
+                    SFX.Rain3_Crack();
                 }
             }
             if(player.isDead==false)

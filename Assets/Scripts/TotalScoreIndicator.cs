@@ -5,9 +5,21 @@ public class TotalScoreIndicator : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI totalsocreindicator;
 
-    public void UpdateTotalSocreGUI()
+    private GameOverStartManager gosm;
+    private RainDestroyer rainDestroyer;
+
+    private void Start()
     {
-        RainDestroyer TSI = GetComponent<RainDestroyer>();
-        totalsocreindicator.text = "Total Score:" + TSI.ScoreCount;
+        gosm = FindFirstObjectByType<GameOverStartManager>();
+        rainDestroyer = FindFirstObjectByType<RainDestroyer>();
+    }
+    public void UpdateTotalSocreGUI()
+    {                        
+        totalsocreindicator.text = "Total \nScore:" + rainDestroyer.ScoreCount;              
+    }
+
+    public void UpdateTotalScoreGUI_Hard()
+    {
+        totalsocreindicator.text = "Total \nScore:" + rainDestroyer.ScoreCount_Hard;
     }
 }

@@ -25,6 +25,7 @@ TagManager:
   - Rain4
   - Rain4_Hard
   - Player_SecondCollider
+  - Rain4_Hard_Collider
   layers:
   - Default
   - TransparentFX

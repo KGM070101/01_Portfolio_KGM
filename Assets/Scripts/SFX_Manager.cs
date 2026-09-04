@@ -36,6 +36,7 @@ public class SFX_Manager : MonoBehaviour
     [SerializeField] private AudioSource playerdead;
     [SerializeField] private AudioSource itemget;
     [SerializeField] private AudioSource playerheal;
+    [SerializeField] private AudioSource rain3Crack;
 
     public AudioClip Title_BGM;
     public AudioClip PlayerDash;
@@ -50,6 +51,7 @@ public class SFX_Manager : MonoBehaviour
     public AudioClip PlayerDead;
     public AudioClip ItemGet;
     public AudioClip PlayerHeal;
+    public AudioClip Rain3Crack;
 
     float bgmVolume;
     float sfxVolume;
@@ -139,6 +141,13 @@ public class SFX_Manager : MonoBehaviour
         rain3landing.volume = 0.3f;
         rain3landing.pitch = 0.5f;
         rain3landing.PlayOneShot(Rain3Landing);
+    }
+
+    public void Rain3_Crack()
+    {
+        rain3Crack.volume = 0.5f;
+        rain3Crack.pitch = 0.7f;
+        rain3Crack.PlayOneShot(Rain3Crack);
     }
 
     public void Player_Slash()

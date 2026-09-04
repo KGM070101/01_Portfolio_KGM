@@ -242,7 +242,7 @@ public class GameOverStartManager : MonoBehaviour
         Time.timeScale = 1.0f;
         bestScoreIndicator.IndicateBestScoreGUI();
         scoreIndicator.UpdateCountGUI();
-        Invoke("Classic_Mode", 1.5f);
+        Invoke("Classic_Mode", 3.0f);
     }
 
     public void CountDownST_hard()
@@ -256,7 +256,7 @@ public class GameOverStartManager : MonoBehaviour
         Time.timeScale = 1.0f;
         bestScoreIndicator.IndicateBestScoreGUI_Hard();
         scoreIndicator.UpdateCountGUI_Hard();
-        Invoke("Hard_Mode", 1.5f);
+        Invoke("Hard_Mode", 3.0f);
     }
     public void Classic_Mode()
     {
@@ -355,7 +355,7 @@ public class GameOverStartManager : MonoBehaviour
         countDown.CountDownStart();
         SFX.Button_Down();
 
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(3.0f);
 
         ContinueGame();
     }

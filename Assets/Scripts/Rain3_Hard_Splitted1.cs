@@ -10,9 +10,16 @@ public class Rain3_Hard_Splitted1 : MonoBehaviour
 
     private new Rigidbody2D rigidbody2D;
 
+    public SpriteRenderer spriteRenderer;
+
+    private Rain4_Hard_PlayerDectecterCollider rain4HardCollider;
+
     private Vector2 RandomXforce = new Vector2(5f, 7f);
     private Vector2 RandomYforce = new Vector2(8.0f, 12.0f);
     private Vector2 RandomRotation = new Vector2(-120.0f, 120.0f);
+
+    private Color inWasabi_Color = new Color(0.5f, 1.0f, 0f);
+
 
     //private Test test;
 
@@ -26,10 +33,18 @@ public class Rain3_Hard_Splitted1 : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         player = FindFirstObjectByType<Player>();
         shortShield = FindFirstObjectByType<ShortShield>(FindObjectsInactive.Include);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        rain4HardCollider = 
+            FindFirstObjectByType<Rain4_Hard_PlayerDectecterCollider>(FindObjectsInactive.Include);
     }
 
     private void Update()
     {
+        if(rain4HardCollider.Rain3_inWasabi==true)
+        {
+            spriteRenderer.color = inWasabi_Color;
+        }
+
         Vector2 facingDirection = -transform.right.normalized;
 
         if (rain3_Hard.BounceCount == 2)
@@ -51,6 +66,14 @@ public class Rain3_Hard_Splitted1 : MonoBehaviour
                                            LayerMask.NameToLayer("Rain3_Splitted"), true);
         }
         transform.Rotate(0f, 0f, randomR * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Rain4_Hard_Collider"))
+        {
+            spriteRenderer.color = inWasabi_Color;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

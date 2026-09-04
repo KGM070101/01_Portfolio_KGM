@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3287729429876349659}
   - component: {fileID: 1784517847794674127}
   - component: {fileID: 3659611963147317104}
+  - component: {fileID: 5994983299341269588}
   m_Layer: 0
   m_Name: SplittedRain3_HardbySamurai_1
   m_TagString: Untagged
@@ -128,6 +129,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f6fb29ec4f91445bd79b9c2f89e7db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+--- !u!61 &5994983299341269588
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105721457048492031}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.07, y: 2.26}
+    newSize: {x: 1.07, y: 2.26}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.07, y: 2.26}
+  m_EdgeRadius: 0
 --- !u!1 &708924184844742973
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544182deb9193894a929219cec5844c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
 --- !u!1 &4377781569832703847
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f86b4b3efea3bc4bb71499927685fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
 --- !u!1 &6981254298533298953
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +811,7 @@ GameObject:
   - component: {fileID: 8016382693299587123}
   - component: {fileID: 4960097952402412223}
   - component: {fileID: 5257287853166284239}
+  - component: {fileID: 4598881113203005151}
   m_Layer: 0
   m_Name: SplittedRain3_HardbySamurai_2
   m_TagString: Untagged
@@ -877,3 +928,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac490dae01410974f94dad0bc3ceb0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+--- !u!61 &4598881113203005151
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6981254298533298953}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.02, y: 2.34}
+    newSize: {x: 1.02, y: 2.34}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.02, y: 2.34}
+  m_EdgeRadius: 0

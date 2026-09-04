@@ -23,7 +23,7 @@ public class CountDown : MonoBehaviour
             if (!IsCounting)
                 return;
 
-            count -= Time.unscaledDeltaTime*2;
+            count -= Time.unscaledDeltaTime;
             CounterText.text = Mathf.CeilToInt(count).ToString();
 
             if (count <= 0)

@@ -79,13 +79,13 @@ public class BestScoreIndicator : MonoBehaviour
     public void UpdateBestScoreGUI() //클래식 모드 최고 점수 업데이트
     {      
         BestScore = PlayerPrefs.GetInt("BestScore", 0);
-        BestScoreText.text = "Best Score:" + BestScore;
+        BestScoreText.text = "Best \nScore:" + BestScore;
     }
 
     public void UpdateBestScoreGUI_Hard() //하드 모드 최고 점수 업데이트
     {
         BestScore_Hard = PlayerPrefs.GetInt("BestScore_Hard", 0);
-        BestScoreText.text = "Best Score:" + BestScore_Hard;
+        BestScoreText.text = "Best \nScore:" + BestScore_Hard;
     }
 
     public void IndicateNewBestScoreGUI()

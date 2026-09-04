@@ -102,7 +102,14 @@ public class Rain : MonoBehaviour
                 
                 
                 TotalScoreIndicator TSI = FindFirstObjectByType<TotalScoreIndicator>();
-                TSI.UpdateTotalSocreGUI();
+                if(GOSM.classic)
+                {
+                    TSI.UpdateTotalSocreGUI();
+                }
+                if(GOSM.hard)
+                {
+                    TSI.UpdateTotalScoreGUI_Hard();
+                }               
 
                 GOSM.GameOver();
                 colPlayer.isDead = true;

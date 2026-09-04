@@ -74,11 +74,11 @@ public class RainDestroyer : MonoBehaviour
                     LayerMask.NameToLayer("Ground"),
                     false);
 
-                Destroy(collision.gameObject);
-                //Debug.Log(ScoreCount);
-
                 ScoreIndicator GetScore = FindFirstObjectByType<ScoreIndicator>();
                 GetScore.UpdateCountGUI();
+
+                Destroy(collision.gameObject);
+                //Debug.Log(ScoreCount);                
             }
         }
 
@@ -107,11 +107,11 @@ public class RainDestroyer : MonoBehaviour
                     }
                 }
 
-                Destroy(collision.gameObject);
-                //Debug.Log(ScoreCount);
-
                 ScoreIndicator GetScore = FindFirstObjectByType<ScoreIndicator>();
                 GetScore.UpdateCountGUI_Hard();
+
+                Destroy(collision.gameObject);
+                //Debug.Log(ScoreCount);                
             }
 
             if (collision.gameObject.CompareTag("Rain3_Hard")) //Rain3_Hard 점수 집계                
@@ -141,11 +141,11 @@ public class RainDestroyer : MonoBehaviour
                     LayerMask.NameToLayer("Ground"),
                     false);
 
-                Destroy(collision.gameObject);
-                //Debug.Log(ScoreCount);
-
                 ScoreIndicator GetScore = FindFirstObjectByType<ScoreIndicator>();
                 GetScore.UpdateCountGUI_Hard();
+
+                Destroy(collision.gameObject);
+                //Debug.Log(ScoreCount);                
             }
         }       
     }//OnTriggerEnter2D    

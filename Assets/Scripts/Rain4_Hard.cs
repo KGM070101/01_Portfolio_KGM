@@ -48,6 +48,8 @@ public class Rain4_Hard : MonoBehaviour
                                       LayerMask.NameToLayer("Rain4_Hard"), true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Rain3_Hard"),
                                        LayerMask.NameToLayer("Rain4_Hard"), true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Rain4_Hard"),
+                                       LayerMask.NameToLayer("Rain4_Hard"), true);
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         originalGravityScale = rigidbody2D.gravityScale;

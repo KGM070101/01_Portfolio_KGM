@@ -29,11 +29,16 @@ public class Rain3_Hard : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
+    private SpriteRenderer spriteRendererInChildren;
+
     private Rain4_Hard_PlayerDectecterCollider Rain4_PDC;
 
     private GameOverStartManager gosm;
 
+    private SFX_Manager sfx;
+
     private Color HitColor = new Color(0.97f, 0.64f, 0.63f);
+    private Color inWasabi_Color = new Color(0.5f, 1.0f, 0f);
 
     public int BounceCount = 0;
     private void Start()
@@ -49,8 +54,10 @@ public class Rain3_Hard : MonoBehaviour
         rainManager = FindFirstObjectByType<RainManager>();
         cameraShaking = FindFirstObjectByType<CameraShaking>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRendererInChildren = GetComponentInChildren<SpriteRenderer>(true);
         Rain4_PDC = FindFirstObjectByType<Rain4_Hard_PlayerDectecterCollider>(FindObjectsInactive.Include);
         gosm = FindFirstObjectByType<GameOverStartManager>();
+        sfx = FindFirstObjectByType<SFX_Manager>();
     }
 
     private void Update()
@@ -89,6 +96,7 @@ public class Rain3_Hard : MonoBehaviour
                 true);
 
                 animator.SetTrigger("Crack");
+                sfx.Rain3_Landing();
             }
             if (rainManager.Rain3_DoubleBounce == true)
             {
@@ -96,9 +104,12 @@ public class Rain3_Hard : MonoBehaviour
                 if (BounceCount == 1)
                 {                    
                     animator.SetTrigger("Crack");
+                    sfx.Rain3_Landing();
                 }
                 if (BounceCount == 2)
                 {
+                    sfx.Rain3_Crack();
+
                     transform.DetachChildren();
                     Splitted1.SetActive(true);
                     Splitted2.SetActive(true);
@@ -205,7 +216,7 @@ public class Rain3_Hard : MonoBehaviour
 
 
                         TotalScoreIndicator TSI = FindFirstObjectByType<TotalScoreIndicator>();
-                        TSI.UpdateTotalSocreGUI();
+                        TSI.UpdateTotalScoreGUI_Hard();
 
                         GOSM.GameOver();
                         colPlayer.isDead = true;
@@ -269,7 +280,7 @@ public class Rain3_Hard : MonoBehaviour
                 {
                     if (shortShield.isInInvincible == false)
                     {
-                        player.PlayerHP -= 2;
+                        player.Damage(2);
                     }
                 }
 
@@ -286,7 +297,7 @@ public class Rain3_Hard : MonoBehaviour
 
 
                     TotalScoreIndicator TSI = FindFirstObjectByType<TotalScoreIndicator>();
-                    TSI.UpdateTotalSocreGUI();
+                    TSI.UpdateTotalScoreGUI_Hard();
 
                     GOSM.GameOver();
                     colPlayer.isDead = true;
@@ -313,6 +324,12 @@ public class Rain3_Hard : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.CompareTag("Rain4_Hard_Collider"))
+        {
+            spriteRendererInChildren.color = inWasabi_Color;
+            spriteRenderer.color = inWasabi_Color;
+        }
+
         if (collision.gameObject.CompareTag("Player"))
         {
             if (isAlive == true)
@@ -359,7 +376,7 @@ public class Rain3_Hard : MonoBehaviour
 
 
                 TotalScoreIndicator TSI = FindFirstObjectByType<TotalScoreIndicator>();
-                TSI.UpdateTotalSocreGUI();
+                TSI.UpdateTotalScoreGUI_Hard();
 
                 GOSM.GameOver();
                 colPlayer.isDead = true;

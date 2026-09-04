@@ -13,7 +13,8 @@ public class DashCoolDownBar : MonoBehaviour
     private float currentDuration;
     private bool isTimerRunning=false;
 
-    private Color barColor = new Color(1, 0.6f, 0);
+    private Color barColor_Charging = new Color(1, 0.75f, 0.3f);
+    private Color barColor_Charged = new Color(0.3f, 0.65f, 1);
 
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class DashCoolDownBar : MonoBehaviour
         }
         if(CoolDownBar.fillAmount==1.0f)
         {
-            CoolDownBar.color = Color.blue;
+            CoolDownBar.color = barColor_Charged;
         }
     }
 
@@ -44,7 +45,7 @@ public class DashCoolDownBar : MonoBehaviour
     {        
         maxDuration = cooldown;
         currentDuration = 0;
-        CoolDownBar.color = barColor;
+        CoolDownBar.color = barColor_Charging;
         isTimerRunning = true;
 
         CoolDownBar.fillAmount = 1.0f;

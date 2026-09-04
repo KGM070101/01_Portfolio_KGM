@@ -129,7 +129,7 @@ public class Rain2_Hard : MonoBehaviour
 
 
                 TotalScoreIndicator TSI = FindFirstObjectByType<TotalScoreIndicator>();
-                TSI.UpdateTotalSocreGUI();
+                TSI.UpdateTotalScoreGUI_Hard();
 
                 GOSM.GameOver();
                 colPlayer.isDead = true;
