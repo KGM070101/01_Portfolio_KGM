@@ -13,6 +13,7 @@ public class Rain4_Hard : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private RainDestroyer rainDestroyer;
     private Player player;
+    private SFX_Manager sfxManager;
 
     private new Rigidbody2D rigidbody2D;
 
@@ -32,6 +33,7 @@ public class Rain4_Hard : MonoBehaviour
         rainDestroyer = FindFirstObjectByType<RainDestroyer>();
         player = FindFirstObjectByType<Player>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        sfxManager = FindFirstObjectByType<SFX_Manager>();
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),
                                        LayerMask.NameToLayer("Rain4"), true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"),
@@ -67,6 +69,7 @@ public class Rain4_Hard : MonoBehaviour
             boxCollider2D.size = SpreadSize;
             boxCollider2D.offset = SpreadOffset;
             Invoke("End_Wasabi", 8.0f);
+            sfxManager.Rain4_Landing();
             bLanded = true;
         }
         //if(bLanded==false)

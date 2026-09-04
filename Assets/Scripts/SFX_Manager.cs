@@ -37,6 +37,7 @@ public class SFX_Manager : MonoBehaviour
     [SerializeField] private AudioSource itemget;
     [SerializeField] private AudioSource playerheal;
     [SerializeField] private AudioSource rain3Crack;
+    [SerializeField] private AudioSource rain4Landing;
 
     public AudioClip Title_BGM;
     public AudioClip PlayerDash;
@@ -52,6 +53,7 @@ public class SFX_Manager : MonoBehaviour
     public AudioClip ItemGet;
     public AudioClip PlayerHeal;
     public AudioClip Rain3Crack;
+    public AudioClip Rain4Landing;
 
     float bgmVolume;
     float sfxVolume;
@@ -162,6 +164,13 @@ public class SFX_Manager : MonoBehaviour
         buttonhover.volume = 0.3f;
         buttonhover.pitch = 1.2f;
         buttonhover.PlayOneShot(ButtonHover);
+    }
+
+    public void Rain4_Landing()
+    {
+        rain4Landing.volume = 0.5f;
+        rain4Landing.pitch = 1.1f;
+        rain4Landing.PlayOneShot(Rain4Landing);
     }
 
     public void TitleBGM()
